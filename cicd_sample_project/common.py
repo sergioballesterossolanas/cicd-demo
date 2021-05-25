@@ -19,7 +19,7 @@ class Job(ABC):
         pass
 
     def __init__(self, spark=None, init_conf=None):
-        print("I am in the init")
+        print("I am in the init2")
         self.spark = self._prepare_spark(spark)
         self.logger = self._prepare_logger()
         self.dbutils = self.get_dbutils()
