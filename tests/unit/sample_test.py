@@ -36,4 +36,5 @@ class SampleJobUnitTest(unittest.TestCase):
 
 
 if __name__ == "__main__":
+    print("I am a test")
     unittest.main()
