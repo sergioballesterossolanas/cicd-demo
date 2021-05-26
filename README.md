@@ -98,3 +98,15 @@ Please set the following secrets or environment variables for your CI provider:
 git tag -a v<your-project-version> -m "Release tag for version <your-project-version>"
 git push origin --tags
 ```
+
+## Useful commands
+
+Create tags locally
+```
+git tag v0.4
+```
+
+Push tags to remote
+```
+git push origin --tags
+```
