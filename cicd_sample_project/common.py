@@ -19,7 +19,6 @@ class Job(ABC):
         pass
 
     def __init__(self, spark=None, init_conf=None):
-        print("Hello world!")
         self.spark = self._prepare_spark(spark)
         self.logger = self._prepare_logger()
         self.dbutils = self.get_dbutils()
@@ -29,6 +28,7 @@ class Job(ABC):
             self.conf = self._provide_config()
         self.init_adapter()
         self._log_conf()
+        print("Hello world!")
 
     @staticmethod
     def _prepare_spark(spark) -> SparkSession:
