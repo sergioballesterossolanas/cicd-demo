@@ -1,10 +1,10 @@
 # Databricks notebook source
-from cicd_sample_project.common import Job
+from cicd_sample_project.jobs.sample.entrypoint import SampleJob
 
 # COMMAND ----------
 
-Job._get_dbutils(spark=spark)
+job = SampleJob()
 
 # COMMAND ----------
 
-
+job.launch()
