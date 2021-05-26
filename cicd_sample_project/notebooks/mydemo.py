@@ -8,7 +8,3 @@ job = SampleJob()
 # COMMAND ----------
 
 job.launch()
-
-# COMMAND ----------
-
-print("This is working")
