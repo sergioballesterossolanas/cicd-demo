@@ -2,7 +2,7 @@ name: Release pipeline
 
 on:
   push:
-  branches:
+    branches:
       - 'master'
 
 
