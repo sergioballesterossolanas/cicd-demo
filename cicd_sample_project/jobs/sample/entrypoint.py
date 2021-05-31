@@ -15,6 +15,7 @@ class SampleJob(Job):
             self.logger.info("Init configuration is already provided")
 
     def launch(self):
+        print("Hello world!")
         self.logger.info("Launching sample job")
 
         listing = self.dbutils.fs.ls("dbfs:/")
