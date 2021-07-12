@@ -105,4 +105,5 @@ class Job(ABC):
         :return:
         """
         print("Hello world!")
+
         pass
