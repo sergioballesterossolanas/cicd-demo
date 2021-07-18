@@ -104,6 +104,4 @@ class Job(ABC):
         Main method of the job.
         :return:
         """
-        print("This is my change")
-        print("Hello world")
         pass
