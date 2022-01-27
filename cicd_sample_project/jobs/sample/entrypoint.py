@@ -34,4 +34,4 @@ class SampleJob(Job):
 if __name__ == "__main__":
     job = SampleJob()
     job.launch()
-print("Hello-Hello World!")
+print("Hello World!")
