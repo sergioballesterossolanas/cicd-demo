@@ -28,7 +28,7 @@ class SampleJob(Job):
             self.conf["output_path"]
         )
 
-        self.logger.info("Sample job finished!")
+        self.logger.info("Sample job finished!!")
 
 
 if __name__ == "__main__":
