@@ -8,6 +8,11 @@
                     "node_type_id": "Standard_DS3_v2",
                     "num_workers": 1
                 },
+                "schedule": {
+                    "quartz_cron_expression": "33 0 0 * * ?",
+                    "timezone_id": "UTC",
+                    "pause_status": "UNPAUSED"
+                },
                 "libraries": [],
                 "email_notifications": {
                     "on_start": [],
