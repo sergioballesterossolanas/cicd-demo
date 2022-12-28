@@ -1,23 +1,15 @@
-import json
 from abc import ABC, abstractmethod
 from argparse import ArgumentParser
 from logging import Logger
 from typing import Dict, Any
-
+import yaml
+import pathlib
 from pyspark.sql import SparkSession
+import sys
 
 
 # abstract class for jobs
 class Job(ABC):
-    @abstractmethod
-    def init_adapter(self):
-        """
-        Init adapter is an abstract method to perform some particular settings in the Job subclass.
-        Method is called after creation of the SparkSession.
-        :return:
-        """
-        pass
-
     def __init__(self, spark=None, init_conf=None):
         self.spark = self._prepare_spark(spark)
         self.logger = self._prepare_logger()
@@ -26,9 +18,7 @@ class Job(ABC):
             self.conf = init_conf
         else:
             self.conf = self._provide_config()
-        self.init_adapter()
         self._log_conf()
-        print("Hello world!")
 
     @staticmethod
     def _prepare_spark(spark) -> SparkSession:
@@ -40,7 +30,8 @@ class Job(ABC):
     @staticmethod
     def _get_dbutils(spark: SparkSession):
         try:
-            from pyspark.dbutils import DBUtils # noqa
+            from pyspark.dbutils import DBUtils  # noqa
+
             if "dbutils" not in locals():
                 utils = DBUtils(spark)
                 return utils
@@ -69,27 +60,23 @@ class Job(ABC):
             )
             return {}
         else:
-            self.logger.info(
-                f"Conf file was provided, reading configuration from {conf_file}"
-            )
+            self.logger.info(f"Conf file was provided, reading configuration from {conf_file}")
             return self._read_config(conf_file)
 
     @staticmethod
     def _get_conf_file():
         p = ArgumentParser()
         p.add_argument("--conf-file", required=False, type=str)
-        namespace = p.parse_known_args()[0]
+        namespace = p.parse_known_args(sys.argv[1:])[0]
         return namespace.conf_file
 
-    def _read_config(self, conf_file) -> Dict[str, Any]:
-        raw_content = "".join(
-            self.spark.read.format("text").load(conf_file).toPandas()["value"].tolist()
-        )
-        config = json.loads(raw_content)
+    @staticmethod
+    def _read_config(conf_file) -> Dict[str, Any]:
+        config = yaml.safe_load(pathlib.Path(conf_file).read_text())
         return config
 
     def _prepare_logger(self) -> Logger:
-        log4j_logger = self.spark._jvm.org.apache.log4j # noqa
+        log4j_logger = self.spark._jvm.org.apache.log4j  # noqa
         return log4j_logger.LogManager.getLogger(self.__class__.__name__)
 
     def _log_conf(self):

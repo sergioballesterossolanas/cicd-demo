@@ -37,7 +37,7 @@ dbx launch --job=cicd-sample-project-sample-integration-test --as-run-submit --t
 ## Interactive execution and development
 
 1. `dbx` expects that cluster for interactive execution supports `%pip` and `%conda` magic [commands](https://docs.databricks.com/libraries/notebooks-python-libraries.html).
-2. Please configure your job in `conf/deployment.json` file. 
+2. Please configure your job in `conf/deployment.yml` file.
 2. To execute the code interactively, provide either `--cluster-id` or `--cluster-name`.
 ```bash
 dbx execute \
@@ -49,9 +49,9 @@ Multiple users also can use the same cluster for development. Libraries will be 
 
 ## Preparing deployment file
 
-Next step would be to configure your deployment objects. To make this process easy and flexible, we're using JSON for configuration.
+Next step would be to configure your deployment objects. To make this process easy and flexible, we're using YAML for configuration.
 
-By default, deployment configuration is stored in `conf/deployment.json`.
+By default, deployment configuration is stored in `conf/deployment.yml`.
 
 ## Deployment for Run Submit API
 
@@ -96,17 +96,5 @@ Please set the following secrets or environment variables for your CI provider:
 - To trigger the release pipeline, get the current version from the `cicd_sample_project/__init__.py` file and tag the current code version:
 ```
 git tag -a v<your-project-version> -m "Release tag for version <your-project-version>"
-git push origin --tags
-```
-
-## Useful commands
-
-Create tags locally
-```
-git tag v0.4
-```
-
-Push tags to remote
-```
 git push origin --tags
 ```
