@@ -1,15 +1,14 @@
-name: Test pipeline
+name: CI pipeline
 
 on:
   push:
     branches:
       - '**'
-      - '!master'
     tags-ignore:
       - 'v*' # this tag type is used for release pipelines
 
 jobs:
-  test-pipeline:
+  ci-pipeline:
 
     runs-on: ubuntu-latest
     strategy:
@@ -25,7 +24,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9
+          python-version: 3.7.5
 
       - name: Install pip
         run: |
@@ -48,6 +47,5 @@ jobs:
       - name: Run integration test
         run: |
           dbx launch --job=cicd-sample-project-sample-integration-test --as-run-submit --trace
-
 
 

@@ -2,17 +2,6 @@ from cicd_sample_project.common import Job
 
 
 class SampleJob(Job):
-    def init_adapter(self):
-        if not self.conf:
-            self.logger.info(
-                "Init configuration was not provided, using configuration from default_init method"
-            )
-            self.conf = {
-                "output_format": "delta",
-                "output_path": "dbfs:/dbx/tmp/test/interactive/cicd_sample_project",
-            }
-        else:
-            self.logger.info("Init configuration is already provided")
 
     def launch(self):
         self.logger.info("Launching sample job")
@@ -28,10 +17,9 @@ class SampleJob(Job):
             self.conf["output_path"]
         )
 
-        self.logger.info("Sample job finished!!")
+        self.logger.info("Sample job finished!")
 
 
 if __name__ == "__main__":
-    print("Hello world!")
     job = SampleJob()
     job.launch()

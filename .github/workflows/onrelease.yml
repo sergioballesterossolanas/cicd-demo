@@ -2,8 +2,8 @@ name: Release pipeline
 
 on:
   push:
-    branches:
-      - 'master'
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [ 3.9 ]
+        python-version: [ 3.7 ]
 
     env:
       DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
@@ -25,7 +25,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v1
         with:
-          python-version: 3.9
+          python-version: 3.7
 
       - name: Install pip
         run: |
@@ -39,4 +39,16 @@ jobs:
         run: |
           dbx deploy --jobs=cicd-sample-project-sample
 
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Release for version ${{ github.ref }}.
+          draft: false
+          prerelease: false
 

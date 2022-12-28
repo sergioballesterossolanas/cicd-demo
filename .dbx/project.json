@@ -1,9 +1,9 @@
 {
-  "environments": {
-    "default": {
-      "profile": "DEFAULT",
-      "workspace_dir": "/Shared/dbx/cicd_sample_project",
-      "artifact_location": "dbfs:/Shared/dbx/projects/cicd_sample_project"
+    "environments": {
+        "default": {
+            "profile": "DEFAULT",
+            "workspace_dir": "/Users/sergio.ballesteros@databricks.com/dbx/cicd_sample_project",
+            "artifact_location": "dbfs:/Users/sergio.ballesteros@databricks.com/dbx/cicd_sample_project"
+        }
     }
-  }
 }

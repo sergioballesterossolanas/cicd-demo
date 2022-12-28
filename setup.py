@@ -6,6 +6,6 @@ setup(
     packages=find_packages(exclude=["tests", "tests.*"]),
     setup_requires=["wheel"],
     version=__version__,
-    description="Databricks Labs CICD Templates Sample Project",
-    author="",
+    description="",
+    author=""
 )
